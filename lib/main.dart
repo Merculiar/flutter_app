@@ -16,17 +16,21 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   final Random random = Random();
-  Color color =
-      Color((Random().nextDouble() * 0xFFFFFF).toInt()).withOpacity(1.0);
-
+  Color color = Color.fromRGBO(
+      Random().nextInt(256), Random().nextInt(256), Random().nextInt(256), 1.0);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: GestureDetector(
         onTap: () {
           setState(() {
-            color = Color.fromRGBO(random.nextInt(256), random.nextInt(256),
-                random.nextInt(256), 1.0);
+            int red = random.nextInt(256);
+            int green = random.nextInt(256);
+            int blue = random.nextInt(256);
+            print("Red is $red");
+            print("Green is $green");
+            print("Blue is $blue");
+            color = Color.fromRGBO(red, green, blue, 1.0);
           });
           print('You have changed color!');
           print('Color is now $color');
