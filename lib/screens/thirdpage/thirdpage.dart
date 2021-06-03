@@ -57,15 +57,18 @@ class _ThirdPageState extends State<ThirdPage>
                           child: Text('Hey There!',
                               style: Theme.of(context).textTheme.headline5)))),
               //button
-              ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    primary: Colors.lightBlue,
-                    onPrimary: Colors.white,
-                  ),
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  child: Text('Go Back'))
+              SizedBox(
+                  width: 100,
+                  height: 50,
+                  child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.lightBlue,
+                        onPrimary: Colors.white,
+                      ),
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      child: Text('Go Back')))
             ],
           ),
         ));
