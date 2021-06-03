@@ -6,10 +6,10 @@ class SecondPage extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           title: Text('Image page'),
-          backgroundColor: Colors.red,
+          backgroundColor: Colors.lightBlue,
         ),
         body: Container(
-          color: Colors.pink[100],
+          color: Colors.lightBlue[100],
           alignment: Alignment.bottomCenter,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -41,7 +41,7 @@ class SecondPage extends StatelessWidget {
                       height: 50,
                       child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            primary: Colors.red,
+                            primary: Colors.lightBlue,
                             onPrimary: Colors.white,
                           ),
                           onPressed: () {
@@ -53,7 +53,7 @@ class SecondPage extends StatelessWidget {
                       height: 50,
                       child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            primary: Colors.red,
+                            primary: Colors.lightBlue,
                             onPrimary: Colors.white,
                           ),
                           onPressed: () {
