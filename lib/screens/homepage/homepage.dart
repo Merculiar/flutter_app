@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'dart:math';
 
-class Home extends StatefulWidget {
+class HomePage extends StatefulWidget {
   @override
-  _MyAppState createState() => _MyAppState();
+  _HomePageState createState() => _HomePageState();
 }
 
-class _MyAppState extends State<Home> {
+class _HomePageState extends State<HomePage> {
   final Random random = Random();
   Color color = Color.fromARGB(Random().nextInt(256), Random().nextInt(256),
       Random().nextInt(256), Random().nextInt(256));
@@ -58,8 +58,13 @@ class _MyAppState extends State<Home> {
                   ),
                 ),
                 SizedBox(
+                  width: 140,
                   height: 50,
                   child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.red,
+                        onPrimary: Colors.white,
+                      ),
                       onPressed: () {
                         Navigator.pushNamed(context, '/second');
                       },

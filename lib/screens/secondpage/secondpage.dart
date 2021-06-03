@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 
-
 class SecondPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('Друге вікно'),
+          title: Text('Image page'),
           backgroundColor: Colors.red,
         ),
         body: Container(
@@ -34,15 +33,35 @@ class SecondPage extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   )),
               //button
-              ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    primary: Colors.red,
-                    onPrimary: Colors.white,
-                  ),
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  child: Text('Go Back'))
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  SizedBox(
+                      width: 100,
+                      height: 50,
+                      child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            primary: Colors.red,
+                            onPrimary: Colors.white,
+                          ),
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          child: Text('Go Back'))),
+                  SizedBox(
+                      width: 100,
+                      height: 50,
+                      child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            primary: Colors.red,
+                            onPrimary: Colors.white,
+                          ),
+                          onPressed: () {
+                            Navigator.pushNamed(context, '/third');
+                          },
+                          child: Text('Next')))
+                ],
+              )
             ],
           ),
         ));
