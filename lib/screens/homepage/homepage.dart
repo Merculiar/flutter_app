@@ -10,30 +10,29 @@ class _HomePageState extends State<HomePage> {
   final Random random = Random();
   Color color = Color.fromARGB(Random().nextInt(256), Random().nextInt(256),
       Random().nextInt(256), Random().nextInt(256));
+  Color _textColor = Colors.black;
 
-  Color colorChanger() {
-    int alpha = random.nextInt(256);
-    int red = random.nextInt(256);
-    int green = random.nextInt(256);
-    int blue = random.nextInt(256);
-    print("Red is $red");
-    print("Green is $green");
-    print("Blue is $blue");
-    color = Color.fromARGB(alpha, red, green, blue);
-    return color;
+  void _colorChanger() {
+    setState(() {
+      int alpha = random.nextInt(256);
+      int red = random.nextInt(256);
+      int green = random.nextInt(256);
+      int blue = random.nextInt(256);
+      print("Red is $red");
+      print("Green is $green");
+      print("Blue is $blue");
+      color = Color.fromARGB(alpha, red, green, blue);
+      _textColor = (red * 299 + green * 587 + blue* 114) / 1000 > 125 ? Colors.black : Colors.white;
+      print('You have changed color!');
+      print('Color is now $color');
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: GestureDetector(
-        onTap: () {
-          setState(() {
-            colorChanger();
-          });
-          print('You have changed color!');
-          print('Color is now $color');
-        },
+        onTap: _colorChanger,
         child: SizedBox.expand(
           child: Container(
             color: color,
@@ -49,12 +48,14 @@ class _HomePageState extends State<HomePage> {
                         style: TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
+                          color: _textColor,
                         ))),
                 Text(
                   'Hey there!',
                   style: TextStyle(
                     fontSize: 30,
                     fontWeight: FontWeight.bold,
+                    color: _textColor,
                   ),
                 ),
                 SizedBox(
@@ -74,6 +75,7 @@ class _HomePageState extends State<HomePage> {
                           style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
+                            color: _textColor,
                           ))),
                 )
               ],
