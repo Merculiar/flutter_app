@@ -1,5 +1,6 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
+import '../../widgets/app_bar.dart';
 
 class ThirdPage extends StatefulWidget {
   @override
@@ -11,16 +12,19 @@ class _ThirdPageState extends State<ThirdPage>
   double _width = 200;
   double _height = 200;
   late AnimationController _controller;
-  late Animation _colorTween;
+  late Animation _colorTween1;
+  late Animation _colorTween2;
 
   @override
   void initState() {
     _controller = AnimationController(
       vsync: this,
-      duration: Duration(seconds: 8),
+      duration: Duration(seconds: 10),
     );
-    _colorTween =
-        ColorTween(begin: Colors.red, end: Colors.blue).animate(_controller)
+    _colorTween1 =
+        ColorTween(begin: Colors.white, end: Colors.black).animate(_controller);
+    _colorTween2 =
+        ColorTween(begin: Colors.black, end: Colors.white).animate(_controller)
           ..addListener(() {
             setState(() {});
           });
@@ -44,12 +48,9 @@ class _ThirdPageState extends State<ThirdPage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text('Animation page'),
-          backgroundColor: Colors.lightBlue,
-        ),
+        appBar: AnimatedAppBar("Animation page","assets/images/Mars.png",Colors.black),
         body: Container(
-          color: Colors.blue[100],
+          color: _colorTween1.value,
           alignment: Alignment.bottomCenter,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -65,7 +66,7 @@ class _ThirdPageState extends State<ThirdPage>
                       child: Container(
                           width: _width,
                           height: _height,
-                          color: _colorTween.value,
+                          color: _colorTween2.value,
                           child: Center(
                               child: Text('Hey There!',
                                   style: Theme.of(context)
@@ -77,7 +78,7 @@ class _ThirdPageState extends State<ThirdPage>
                   height: 50,
                   child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        primary: Colors.lightBlue,
+                        primary: Colors.grey,
                         onPrimary: Colors.white,
                       ),
                       onPressed: () {
