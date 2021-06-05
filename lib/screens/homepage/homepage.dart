@@ -8,11 +8,11 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final Random random = Random();
-  Color color = Color.fromARGB(Random().nextInt(256), Random().nextInt(256),
+  Color _color = Color.fromARGB(Random().nextInt(256), Random().nextInt(256),
       Random().nextInt(256), Random().nextInt(256));
   Color _textColor = Colors.black;
 
-  void _colorChanger() {
+  void colorChanger() {
     setState(() {
       int alpha = random.nextInt(256);
       int red = random.nextInt(256);
@@ -21,10 +21,12 @@ class _HomePageState extends State<HomePage> {
       print("Red is $red");
       print("Green is $green");
       print("Blue is $blue");
-      color = Color.fromARGB(alpha, red, green, blue);
-      _textColor = (red * 299 + green * 587 + blue* 114) / 1000 > 125 ? Colors.black : Colors.white;
+      _color = Color.fromARGB(alpha, red, green, blue);
+      _textColor = (red * 299 + green * 587 + blue * 114) / 1000 > 125
+          ? Colors.black
+          : Colors.white;
       print('You have changed color!');
-      print('Color is now $color');
+      print('Color is now $_color');
     });
   }
 
@@ -32,10 +34,10 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: GestureDetector(
-        onTap: _colorChanger,
+        onTap: colorChanger,
         child: SizedBox.expand(
           child: Container(
-            color: color,
+            color: _color,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
