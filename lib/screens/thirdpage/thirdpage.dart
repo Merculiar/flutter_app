@@ -48,7 +48,8 @@ class _ThirdPageState extends State<ThirdPage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AnimatedAppBar("Animation page","assets/images/Mars.png",Colors.black),
+        appBar: AnimatedAppBar(
+            "Animation page", "assets/images/Mars.png", Colors.black, 390, 400),
         body: Container(
           color: _colorTween1.value,
           alignment: Alignment.bottomCenter,

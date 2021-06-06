@@ -5,8 +5,10 @@ class AnimatedAppBar extends StatefulWidget implements PreferredSizeWidget {
   final String title;
   final String imagePath;
   final Color color;
+  final double fitwidth;
+  final double fitheigth;
 
-  AnimatedAppBar(this.title, this.imagePath, this.color);
+  AnimatedAppBar(this.title, this.imagePath, this.color, this.fitwidth, this.fitheigth);
 
   @override
   _AnimatedAppBarState createState() => _AnimatedAppBarState();
@@ -32,6 +34,12 @@ class _AnimatedAppBarState extends State<AnimatedAppBar>
   }
 
   @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Container(
       color: widget.color,
@@ -47,7 +55,7 @@ class _AnimatedAppBarState extends State<AnimatedAppBar>
                 alignment: Alignment.topCenter,
                 child: RotationTransition(
                   turns: _rotateAnimation,
-                  child: Image.asset(widget.imagePath),
+                  child: Image.asset(widget.imagePath, width: widget.fitwidth, height : widget.fitheigth),
                 ),
               ),
             ),
