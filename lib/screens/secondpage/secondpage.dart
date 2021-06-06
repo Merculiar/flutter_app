@@ -5,7 +5,7 @@ class SecondPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AnimatedAppBar("Image page","assets/images/Moon.png", Colors.grey),
+        appBar: AnimatedAppBar("Image page","assets/images/Moon.png", Colors.grey,415,415),
         body: Container(
             color: Colors.grey,
             alignment: Alignment.bottomCenter,
