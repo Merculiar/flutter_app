@@ -14,7 +14,7 @@ class SecondPage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   //photo
-                  Image.asset('assets/images/Space.jpg'),
+                  Image.asset('assets/images/Space.jpg',),
                   //text1
                   Text('Keep calm!',
                       textDirection: TextDirection.ltr,
