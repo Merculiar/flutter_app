@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:math';
-
+import 'dart:async';
 
 class HomePage extends StatefulWidget {
   @override
@@ -12,6 +12,10 @@ class _HomePageState extends State<HomePage> {
   Color _color = Color.fromARGB(Random().nextInt(256), Random().nextInt(256),
       Random().nextInt(256), Random().nextInt(256));
   Color _textColor = Colors.black;
+  Color _textColor2 = Colors.white;
+  bool _isRunning = false;
+  int _speed = 2;
+  Timer _timer = Timer.periodic(Duration(seconds: 0), (Timer t) {});
 
   void colorChanger() {
     setState(() {
@@ -26,9 +30,27 @@ class _HomePageState extends State<HomePage> {
       _textColor = (red * 299 + green * 587 + blue * 114) / 1000 > 125
           ? Colors.black
           : Colors.white;
+      _textColor2 = (red * 299 + green * 587 + blue * 114) / 1000 > 125
+          ? Colors.white
+          : Colors.black;
       print('You have changed color!');
       print('Color is now $_color');
     });
+  }
+
+  void autocolorChanger() {
+    var wait = Duration(seconds: _speed);
+    if (_isRunning) return;
+    _isRunning = true;
+    _timer = Timer.periodic(wait, (Timer t) {
+      colorChanger();
+    });
+  }
+
+  void stop() {
+    _isRunning = false;
+    _timer.cancel();
+    print("Stopped");
   }
 
   @override
@@ -43,16 +65,61 @@ class _HomePageState extends State<HomePage> {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                SizedBox(
-                    height: 50,
-                    child: Text('Press on the screen to change color!',
-                        textDirection: TextDirection.ltr,
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          color: _textColor,
-                        ))),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    IconButton(
+                      icon: Icon(Icons.play_circle_rounded),
+                      tooltip: 'Start auto generation',
+                      iconSize: 60,
+                      onPressed: () {
+                        autocolorChanger();
+                      },
+                    ),
+                    Column(children: [
+                      Text('Set the speed',
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: _textColor,
+                          )),
+                      Text('(you need to pause and run again',
+                          style: TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.bold,
+                            color: _textColor,
+                          )),
+                      Text('to see the result)',
+                          style: TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.bold,
+                            color: _textColor,
+                          )),
+                      Slider(
+                        activeColor: _textColor,
+                        inactiveColor: _textColor2,
+                        value: _speed.toDouble(),
+                        onChanged: (newspeed) {
+                          setState(() {
+                            _speed = newspeed.toInt();
+                          });
+                        },
+                        label: "$_speed sec",
+                        min: 1,
+                        max: 10,
+                        divisions: 9,
+                      )
+                    ]),
+                    IconButton(
+                      icon: Icon(Icons.pause_circle_rounded),
+                      tooltip: 'Start auto generation',
+                      iconSize: 60,
+                      onPressed: () {
+                        stop();
+                      },
+                    ),
+                  ],
+                ),
                 Text(
                   'Hey there!',
                   style: TextStyle(
@@ -71,6 +138,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                       onPressed: () {
                         Navigator.pushNamed(context, '/second');
+                        stop();
                       },
                       child: Text('Next page',
                           textDirection: TextDirection.ltr,
